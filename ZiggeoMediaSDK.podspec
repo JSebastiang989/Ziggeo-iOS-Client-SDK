@@ -8,19 +8,19 @@
 
 Pod::Spec.new do |spec|
   spec.name             = 'ZiggeoMediaSDK'
-  spec.version          = '1.1.48'
+  spec.version          = '1.1.49'
   spec.summary          = 'Ziggeo iOS Client SDK'
   spec.description      = 'Ziggeo iOS recording and playback SDK'
 
   spec.homepage         = 'http://ziggeo.com'
   spec.license          = { :type => 'Confidential', :file => 'LICENSE' }
   spec.author           = { 'Ziggeo Inc' => 'support@ziggeo.com' }
-  spec.source           = { :git => 'https://github.com/Ziggeo/iOS-Client-SDK.git', :tag => spec.version.to_s }
+  spec.source           = { :git => 'https://github.com/JSebastiang989/Ziggeo-iOS-Client-SDK.git', :tag => spec.version.to_s }
   
   spec.platform         = :ios, "15.0"
   spec.dependency       'GoogleAds-IMA-iOS-SDK', '>= 3.28.0'
 
   spec.ios.deployment_target  = '15.0'
-  spec.vendored_frameworks    = 'Frameworks/ZiggeoMediaSDK.framework'
-  spec.source_files = "Frameworks/*.*"
+  spec.vendored_frameworks    = 'Frameworks/ZiggeoMediaSDK.xcframework'
+  spec.preserve_paths        = 'Frameworks/ZiggeoMediaSDK.xcframework'
 end

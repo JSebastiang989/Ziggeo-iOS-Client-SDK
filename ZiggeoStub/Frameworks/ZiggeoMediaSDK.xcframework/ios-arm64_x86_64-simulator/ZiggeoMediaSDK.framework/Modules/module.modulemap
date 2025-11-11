@@ -1,0 +1,6 @@
+framework module ZiggeoMediaSDK {
+  umbrella header "ZiggeoMediaSDK.h"
+  export *
+
+  module * { export * }
+}
