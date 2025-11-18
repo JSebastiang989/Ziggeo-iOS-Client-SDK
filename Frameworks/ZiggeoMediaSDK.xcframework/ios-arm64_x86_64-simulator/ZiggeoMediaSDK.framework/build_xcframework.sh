@@ -55,6 +55,18 @@ SIM_FW=$(find "$BUILD_DIR/Build/Products/${STUB_CONFIG}-iphonesimulator" -name "
 [[ -n "${SIM_FW:-}" ]] || { echo "❌ Could not find simulator framework product"; exit 1; }
 echo "SIM_FW=${SIM_FW}"
 
+# After you set THIN_DEVICE_FW and BIN and lipo -thin arm64 ...
+SWIFT_DIR="${THIN_DEVICE_FW}/Modules/ZiggeoMediaSDK.swiftmodule"
+if [ -d "$SWIFT_DIR" ]; then
+  echo "Removing Swift module payload from device framework to force ObjC-only import"
+  rm -rf "$SWIFT_DIR"
+fi
+
+# Some vendors also drop loose .swiftinterface files; nuke any stragglers:
+find "${THIN_DEVICE_FW}/Modules" -maxdepth 1 -name "*.swiftinterface" -delete || true
+find "${THIN_DEVICE_FW}/Modules" -maxdepth 1 -name "*.swiftdoc" -delete || true
+
+
 # --- Create xcframework (use THIN_DEVICE_FW) ---
 /usr/bin/xcodebuild -create-xcframework \
   -framework "$THIN_DEVICE_FW" \
